@@ -2,10 +2,12 @@ function [ status ] = trainingFun(settings)
 % 训练模式函数
 % 标签分为4中，前后左右，用一个四行一列的向量表示
 
-disp('Starting training\n')
+disp('Starting training')
 
 %初始化变量
 global net;
+global currentType;
+global startFlag;
 startFlag = false;
 trainingSet = zeros(12288,1);
 trainingLabel = zeros(4,0);
@@ -13,12 +15,12 @@ labelType = struct('forward', [1;0;0;0],'backward',  [0;1;0;0], 'turnleft',  [0;
 currentType = '';
 
 try
-    disp('Connecting\n')
-    dest = strcat('http://',settings.ip,':',settings.port,'/?action=stream');
+    disp('Connecting')
+    dest = strcat('http://',settings.ip,':',settings.vport,'/?action=stream');
     cam = ipcam(dest);
 catch
     disp('Connection failed,please check your connection')
-    exit(1);
+    pause
 end
 
 % 执行UI函数
@@ -47,7 +49,6 @@ while status < 1000
         trainingLabel = [trainingLabel tempLabel];
     end
     trainingSet = [trainingSet I];
-    disp(result);
     clear I
     status = status + 1;   %status作为一个计数器，防止内存溢出
 end

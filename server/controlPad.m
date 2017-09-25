@@ -22,7 +22,7 @@ function varargout = controlPad(varargin)
 
 % Edit the above text to modify the response to help controlPad
 
-% Last Modified by GUIDE v2.5 24-Sep-2017 21:50:05
+% Last Modified by GUIDE v2.5 25-Sep-2017 20:56:20
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -78,13 +78,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-cmd('forward')
+currentType = 'forward';cmd(currentType);
 
 % --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
+function pushbutton2_Callback(~, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+currentType = 'turnleft';cmd(currentType);
 
 
 % --- Executes on button press in pushbutton3.
@@ -92,6 +93,7 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+currentType = 'backward';cmd(currentType);
 
 
 % --- Executes on button press in pushbutton4.
@@ -99,3 +101,14 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+currentType = 'turnright';cmd(currentType);
+
+
+% --- Executes on button press in togglebutton1.
+function togglebutton1_Callback(hObject, eventdata, handles)
+% hObject    handle to togglebutton1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of togglebutton1
+startFlag = ~startFlag;

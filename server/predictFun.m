@@ -7,7 +7,7 @@ try
     cam = ipcam(dest);
 catch
     disp('Connection failed,please check your connection')
-    exit(1);
+    pause
 end
     
 url = strcat('http://',settings.ip,':',settings.cport,'/cmd');
