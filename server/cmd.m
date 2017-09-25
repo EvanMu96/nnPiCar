@@ -1,6 +1,8 @@
 function [response,completedrequest,history ] = cmd( action,uri)
-%UNTITLED2 此处显示有关此函数的摘要
-%   此处显示详细说明
+% 控制小车前进后退
+%  action/uri类型都是str,一个是要执行的状态，另一个是要post过去的地址
+% action 的状态有八种，控制小车的是'forward' 'backward' 'turnleft' 'turn right'四种
+% 控制云台旋转的是'up' 'down' 'left' 'right'四种
 body = matlab.net.http.MessageBody(action);
 method = matlab.net.http.RequestMethod.POST;
 type1 = matlab.net.http.MediaType('*/*');
