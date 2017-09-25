@@ -8,11 +8,13 @@ disp('Starting training')
 global net;
 global currentType;
 global startFlag;
+global curl;
+curl = strcat('http://',settings.ip,':',settings.cport,'/cmd');
 startFlag = false;
 trainingSet = zeros(12288,1);
 trainingLabel = zeros(4,0);
 labelType = struct('forward', [1;0;0;0],'backward',  [0;1;0;0], 'turnleft',  [0;0;1;0], 'turnright',[0,0,0,1]);
-currentType = '';
+currentType = 'stop';
 
 try
     disp('Connecting')
@@ -25,10 +27,10 @@ end
 
 % 执行UI函数
 controlPad();
-
+quitLoop = false;
 status = 0;  %正常退出状态为0,
 
-while status < 1000
+while (status < 1000) & (~quitLoop)
     tempLabel = zeros(4,1);
     I = snapshot(cam);
     imshow(I);
@@ -37,22 +39,27 @@ while status < 1000
         switch currentType
             case 'forward'
                 tempLabel = labelType.forward;
+                trainingLabel = [trainingLabel tempLabel];
             case 'backward'
                 tempLabel = labelType.backward;
+                trainingLabel = [trainingLabel tempLabel];
             case 'turnleft'
                 tempLabel = labelType.turnleft;
+                trainingLabel = [trainingLabel tempLabel];
             case 'turnright'
                 tempLabel = labelType.turnright;
+                trainingLabel = [trainingLabel tempLabel];
+            case 'stop'
+                disp('stop')
             otherwise
                     disp('FATAL ERROR, LABEL ERROR!!')
         end
-        trainingLabel = [trainingLabel tempLabel];
     end
     trainingSet = [trainingSet I];
     clear I
     status = status + 1;   %status作为一个计数器，防止内存溢出
 end
-
+close
 startFlag = false;
 trainingSet = trainingSet(:, 2:end);
 trainingLabel = trainingLabel(:, 2:end);

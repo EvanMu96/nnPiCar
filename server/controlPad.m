@@ -78,7 +78,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-currentType = 'forward';cmd(currentType);
+global currentType;global curl;
+currentType = 'forward';cmd(currentType,curl);
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(~, eventdata, handles)
@@ -111,4 +112,10 @@ function togglebutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of togglebutton1
-startFlag = ~startFlag;
+global startFlag;
+button_state = get(hObject,'Value');
+if button_state == get(hObject,'Max')
+	startFlag = ~startFlag;
+elseif button_state == get(hObject,'Min')
+	startFlag = ~startFlag;
+end

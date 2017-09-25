@@ -3,7 +3,7 @@ function [ status ] = predictFun(settings )
 status = 0;   %正常退出状态为0
 try
     disp('Connecting\n')
-    dest = strcat('http://',settings.ip,':',settings.port,'/?action=stream');
+    dest = strcat('http://',settings.ip,':',settings.vport,'/?action=stream');
     cam = ipcam(dest);
 catch
     disp('Connection failed,please check your connection')
