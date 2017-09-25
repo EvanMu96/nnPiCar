@@ -11,15 +11,15 @@ prompt = 'Choose the work mode, training or prediction, [T]/[p] \n';
 workType = input(prompt, 's');
 switch workType
     case ''
-        trainingF
+        trainingFun()
     case 't'
-        run trainingFun.m
+        trainingFun()
     case 'T'
-        run trainingFun.m
+        trainingFun()
     case 'P'
-        run predictFun.m
+        predictFun()
     case 'p'
-        run predictFun.m
+        predictFun()
     otherwise
         disp('Your input is wrong, please run this script again')
 end

@@ -1,4 +1,5 @@
 function [ status ] = predictFun(settings )
+% settings为配置对象
 status = 0;   %正常退出状态为0
 try
     disp('Connecting\n')
@@ -9,7 +10,7 @@ catch
     exit(1);
 end
     
-ur = strcat('http://',settings.ip,':',settings.cport,'/cmd');
+url = strcat('http://',settings.ip,':',settings.cport,'/cmd');
 while 1
     I = snapshot(cam);
     imshow(I);
@@ -20,10 +21,10 @@ while 1
     if probability > 0.8 
         result = 'yes';
         action = 'forward';
-        [~,~,~] = cmd(action,uri);
+        [~,~,~] = cmd(action,url);
         pause(0.1);
         action = 'stop';
-        [~,~,~] = cmd(action,uri);
+        [~,~,~] = cmd(action,url);
     end
     disp(result);
     clear I
