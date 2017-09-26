@@ -22,7 +22,7 @@ function varargout = controlPad(varargin)
 
 % Edit the above text to modify the response to help controlPad
 
-% Last Modified by GUIDE v2.5 25-Sep-2017 20:56:20
+% Last Modified by GUIDE v2.5 26-Sep-2017 13:40:36
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -79,14 +79,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global currentType;global curl;
-currentType = 'forward';cmd(currentType,curl);
+currentType = 'forward';cmd(currentType,curl);pause(0.2);cmd('stop',curl);
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(~, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-currentType = 'turnleft';cmd(currentType);
+global currentType;global curl;
+currentType = 'turnleft';cmd(currentType, curl);pause(0.2);cmd('stop',curl);
 
 
 % --- Executes on button press in pushbutton3.
@@ -94,7 +95,8 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-currentType = 'backward';cmd(currentType);
+global currentType;global curl;
+currentType = 'backward';cmd(currentType, curl);pause(0.2);cmd('stop',curl);
 
 
 % --- Executes on button press in pushbutton4.
@@ -102,7 +104,8 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-currentType = 'turnright';cmd(currentType);
+global currentType;global curl;
+currentType = 'turnright';cmd(currentType, curl);pause(0.2);cmd('stop',curl);
 
 
 % --- Executes on button press in togglebutton1.
@@ -119,3 +122,12 @@ if button_state == get(hObject,'Max')
 elseif button_state == get(hObject,'Min')
 	startFlag = ~startFlag;
 end
+
+
+% --- Executes on button press in pushbutton5.
+function pushbutton5_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global quitLoop;
+quitLoop = true;

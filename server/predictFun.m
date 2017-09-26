@@ -1,4 +1,4 @@
-function [ status ] = predictFun(settings )
+function [ status ] = predictFun(settings, net)
 % settings为配置对象
 status = 0;   %正常退出状态为0
 try
@@ -16,7 +16,7 @@ while 1
     imshow(I);
     I = preprocess(I);
     % probability = getcircle2(I);
-    probability = getcircle(I);
+    probability = net(I);
     result = 'no';
     if probability > 0.8 
         result = 'yes';
