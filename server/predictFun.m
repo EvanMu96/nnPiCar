@@ -1,29 +1,30 @@
-function [ status ] = predictFun(settings )
+function [ status ] = predictFun(settings, net)
+% settings为配置对象
 status = 0;   %正常退出状态为0
 try
     disp('Connecting\n')
-    dest = strcat('http://',settings.ip,':',settings.port,'/?action=stream');
+    dest = strcat('http://',settings.ip,':',settings.vport,'/?action=stream');
     cam = ipcam(dest);
 catch
     disp('Connection failed,please check your connection')
-    exit(1);
+    pause
 end
     
-ur = strcat('http://',settings.ip,':',settings.cport,'/cmd');
+url = strcat('http://',settings.ip,':',settings.cport,'/cmd');
 while 1
     I = snapshot(cam);
     imshow(I);
     I = preprocess(I);
     % probability = getcircle2(I);
-    probability = getcircle(I);
+    probability = net(I);
     result = 'no';
     if probability > 0.8 
         result = 'yes';
         action = 'forward';
-        [~,~,~] = cmd(action,uri);
+        [~,~,~] = cmd(action,url);
         pause(0.1);
         action = 'stop';
-        [~,~,~] = cmd(action,uri);
+        [~,~,~] = cmd(action,url);
     end
     disp(result);
     clear I
