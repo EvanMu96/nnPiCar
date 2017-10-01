@@ -6,23 +6,28 @@
 % 第二种是预测模式,在预测模式下,下车能够调用训练好的神经网络对摄像头传输的数据进行实时预测
 close all
 clear 
+net = 0;
 load('settings.mat');
 prompt = 'Choose the work mode, training or prediction, [T]/[p] \n';
 workType = input(prompt, 's');
 switch workType
     case ''
-        trainingFun(settings)
-        afterTraining()
+        net = trainingFun(settings);
+        afterTraining(settings, net);
     case 't'
-        trainingFun(settings)
-        afterTraining()
+        net = trainingFun(settings);
+        afterTraining(settings, net);
     case 'T'
-        trainingFun(settings)
-        afterTraining()
+        net = trainingFun(settings);
+        afterTraining(settings, net);
     case 'P'
-        predictFun(settings)
+        net = load('net.mat');
+        net = net.net;
+        predictFun(settings, net);
     case 'p'
-        predictFun(settings)
+        net = load('net.mat');
+        net = net.net;
+        predictFun(settings, net);
     otherwise
         disp('Your input is wrong, please run this script again')
 end

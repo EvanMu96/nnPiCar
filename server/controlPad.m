@@ -22,7 +22,7 @@ function varargout = controlPad(varargin)
 
 % Edit the above text to modify the response to help controlPad
 
-% Last Modified by GUIDE v2.5 26-Sep-2017 13:40:36
+% Last Modified by GUIDE v2.5 27-Sep-2017 13:26:40
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -131,3 +131,12 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global quitLoop;
 quitLoop = true;
+
+
+% --- Executes on button press in pushbutton6.
+function pushbutton6_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global currentType;
+currentType = 'stop';
